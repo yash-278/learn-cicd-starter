@@ -93,8 +93,9 @@ func main() {
 
 	router.Mount("/v1", v1Router)
 	srv := &http.Server{
-		Addr:    ":" + port,
-		Handler: router,
+		Addr:              ":" + port,
+		Handler:           router,
+		ReadHeaderTimeout: 5,
 	}
 
 	log.Printf("Serving on port: %s\n", port)
@@ -116,9 +117,4 @@ func addParseTimeParam(input string) (string, error) {
 	returnUrl := u.String()
 	returnUrl = strings.TrimPrefix(returnUrl, dummyScheme)
 	return returnUrl, nil
-}
-
-func unused() {
-	// this function does nothing
-	// and is called nowhere
 }
